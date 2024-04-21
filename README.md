@@ -28,4 +28,4 @@ npm run lint
 
 ### Deployment
 
-Vercel: https://simple-web-ziitn78x8-fitriadamayanti12s-projects.vercel.app
+Vercel: https://simple-web-app-eight.vercel.app/
