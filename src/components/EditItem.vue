@@ -21,36 +21,44 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'EditItem',
-  data() {
-    return {
-      form: {
-        title: '',
-        description: ''
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+
+    const form = ref({
+      title: '',
+      description: ''
+    })
+
+    const fillFormWithItemData = async () => {
+      const itemId = router.currentRoute.value.params.id
+      const item = store.state.items.find((item) => item.id == itemId)
+      if (item) {
+        form.value.title = item.title
+        form.value.description = item.body
       }
     }
-  },
-  async created() {
-    const store = useStore()
-    const route = useRouter()
-    const itemId = route.params.id
-    const item = store.state.items.find((item) => item.id == itemId)
-    this.form.title = item.title
-    this.form.description = item.body
-  },
-  methods: {
-    async updateItem() {
-      await this.$store.dispatch('updateItem', {
-        id: this.$route.params.id,
-        title: this.form.title,
-        body: this.form.description
+
+    onMounted(fillFormWithItemData)
+
+    const updateItem = async () => {
+      await store.dispatch('updateItem', {
+        id: router.currentRoute.value.params.id,
+        title: form.value.title,
+        body: form.value.description
       })
-      this.$router.push({ name: 'ItemList' })
+      router.push({ name: 'ItemList' })
+    }
+
+    return {
+      form,
+      updateItem
     }
   }
 }
