@@ -1,14 +1,6 @@
-# simple-web-app
+# Simple Web App
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+This my simple web app for coding test, display list of items, using JSONPlaceholder for Mock API
 
 ## Project Setup
 
@@ -33,3 +25,7 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Deployment
+
+Vercel: https://simple-web-ziitn78x8-fitriadamayanti12s-projects.vercel.app
