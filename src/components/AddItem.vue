@@ -21,12 +21,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
   name: 'AddItem',
+  emits: ['item-added'], // Define custom event
   data() {
     return {
       form: {
@@ -41,7 +42,10 @@ export default {
         title: this.form.title,
         body: this.form.description
       })
+      this.form.title = ''
+      this.form.description = ''
       this.$router.push({ name: 'ItemList' })
+      this.$emit('item-added') // Emit custom event after adding item
     }
   }
 }

@@ -1,8 +1,8 @@
-<!-- ItemList.vue -->
 <template>
   <div>
-    <h1>Items</h1>
-    <ul class="list-group">
+    <h1>List of Items</h1>
+    <router-link to="/add" class="btn btn-success mb-3">Add Item</router-link>
+    <ul class="list-group mb-3">
       <li
         v-for="item in items"
         :key="item.id"
@@ -16,12 +16,11 @@
         <button @click="deleteItem(item.id)" class="btn btn-danger btn-sm">Delete</button>
       </li>
     </ul>
-    <router-link to="/add" class="btn btn-success mt-3">Add Item</router-link>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -40,10 +39,16 @@ export default {
       if (confirm('Are you sure you want to delete this item?')) {
         await this.$store.dispatch('deleteItem', itemId)
       }
+    },
+    addItemToList(newItem) {
+      this.$store.commit('addItem', newItem)
     }
   },
-  created() {
-    this.$store.dispatch('fetchItems')
+  async created() {
+    await this.$store.dispatch('fetchItems')
+  },
+  onMounted() {
+    this.$on('item-added', this.addItemToList)
   }
 }
 </script>

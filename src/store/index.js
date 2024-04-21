@@ -9,7 +9,7 @@ const store = createStore({
       state.items = items
     },
     addItem(state, newItem) {
-      state.items.push(newItem)
+      state.items.unshift(newItem)
     },
     updateItem(state, updatedItem) {
       const index = state.items.findIndex((item) => item.id === updatedItem.id)
