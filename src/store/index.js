@@ -8,8 +8,8 @@ const store = createStore({
     setItems(state, items) {
       state.items = items
     },
-    addItem(state, item) {
-      state.items.push(item)
+    addItem(state, newItem) {
+      state.items.push(newItem)
     },
     updateItem(state, updatedItem) {
       const index = state.items.findIndex((item) => item.id === updatedItem.id)
